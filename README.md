@@ -2,13 +2,13 @@
 
 A reimplementation of SRGNN. 
 
-![image](https://github.com/RuihongQiu/SRGNN_PyG/raw/master/Results.PNG)
+![image](https://github.com/SwithinHwong/SRGNN_PyG_playground/blob/master/Results.PNG)
 
 Original code from [here](https://github.com/CRIPAC-DIG/SR-GNN). Original [paper](https://arxiv.org/abs/1811.00855).
 
 Borrow the data preprocessing from original repo, including `diginetica` and `yoochoose`.
 
-Using PyTorch 1.2.0, [PyTorch-Geometric 1.3.1](https://github.com/rusty1s/pytorch_geometric) and [tqdm](https://github.com/tqdm/tqdm).
+Using PyTorch 1.8.0, [PyTorch-Geometric 1.7](https://github.com/rusty1s/pytorch_geometric) and [tqdm](https://github.com/tqdm/tqdm).
 
 ## Data preparation
 

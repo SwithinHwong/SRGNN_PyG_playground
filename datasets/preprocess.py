@@ -37,7 +37,8 @@ with open(dataset, "r") as f:
     curid = -1
     curdate = None
     for data in reader:
-        sessid = data['session_id']
+        # print(data)
+        sessid = data['sessionId']
         if curdate and not curid == sessid:
             date = ''
             if opt.dataset == 'yoochoose':
@@ -49,7 +50,7 @@ with open(dataset, "r") as f:
         if opt.dataset == 'yoochoose':
             item = data['item_id']
         else:
-            item = data['item_id'], int(data['timeframe'])
+            item = data['itemId'], int(data['timeframe'])
         curdate = ''
         if opt.dataset == 'yoochoose':
             curdate = data['timestamp']

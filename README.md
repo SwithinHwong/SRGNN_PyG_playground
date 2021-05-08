@@ -1,4 +1,4 @@
-# SRGNN_PyG
+# SRGNN_PyG_Playground
 
 A reimplementation of SRGNN. 
 

@@ -28,7 +28,8 @@ elif opt.dataset =='yoochoose':
 print("-- Starting @ %ss" % datetime.datetime.now())
 with open(dataset, "r") as f:
     if opt.dataset == 'yoochoose':
-        reader = csv.DictReader(f, delimiter=',')
+        # reader = csv.DictReader(f, delimiter=',')
+        reader = csv.DictReader(f, fieldnames = ['session_id', 'timestamp', 'item_id', 'category'], delimiter=',')
     else:
         reader = csv.DictReader(f, delimiter=';')
     sess_clicks = {}
@@ -38,7 +39,10 @@ with open(dataset, "r") as f:
     curdate = None
     for data in reader:
         # print(data)
-        sessid = data['sessionId']
+        if opt.dataset == 'yoochoose':
+            sessid = data['session_id']
+        else:
+            sessid = data['sessionId']
         if curdate and not curid == sessid:
             date = ''
             if opt.dataset == 'yoochoose':

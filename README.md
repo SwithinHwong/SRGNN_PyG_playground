@@ -12,14 +12,23 @@ Using PyTorch 1.8.0, [PyTorch-Geometric 1.7](https://github.com/rusty1s/pytorch_
 
 ## Data preparation
 
-1) Follow the steps in original code repo to get `train.txt` and `test.txt` for every dataset.
+1. Download datasets used in the paper: [YOOCHOOSE](http://2015.recsyschallenge.com/challenge.html) and [DIGINETICA](http://cikm2016.cs.iupui.edu/cikm-cup). Put the two specific files named `train-item-views.csv` and `yoochoose-clicks.dat` into the folder `datasets/`
 
-2) Put both `tain.txt` and `test.txt` in the `raw` folder W.R.T. different datasets.
+2. Change to `datasets` fold and run `preprocess.py` script to preprocess datasets. Two directories named after dataset should be generated under `datasets/`.
+```bash
+python preprocess.py --dataset diginetica
+python preprocess.py --dataset yoochoose
+```
+
 
 ## Training and testing
-
-    cd src
-    python main.py --dataset=diginetica
+```bash
+cd src
+# python main.py --dataset=diginetica
+nohup python -u main.py --dataset=diginetica > ../log/train_diginetica.log &
+nohup python -u main.py --dataset=yoochoose1_4 > ../log/train_yoochoose1_4.log &
+nohup python -u main.py --dataset=yoochoose1_64 > ../log/train_yoochoose1_64.log &
+```
 
 ## Citation
 

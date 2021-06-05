@@ -41,6 +41,7 @@ def forward(model, loader, device, writer, epoch, top_k=20, optimizer=None, trai
                 else:
                     mrr.append(1 / (np.where(score == target)[0][0] + 1))
 
+        # print('loss=', loss)
         mean_loss += loss / batch.num_graphs
 
     if train_flag:
@@ -51,3 +52,4 @@ def forward(model, loader, device, writer, epoch, top_k=20, optimizer=None, trai
         mrr = np.mean(mrr) * 100
         writer.add_scalar('index/hit', hit, epoch)
         writer.add_scalar('index/mrr', mrr, epoch)
+        print(f"epoch={epoch}, hit={hit}, mrr={mrr}")

@@ -25,9 +25,9 @@ python preprocess.py --dataset yoochoose
 ```bash
 cd src
 # python main.py --dataset=diginetica
-nohup python -u main.py --dataset=diginetica > ../log/train_diginetica.log &
-nohup python -u main.py --dataset=yoochoose1_4 > ../log/train_yoochoose1_4.log &
-nohup python -u main.py --dataset=yoochoose1_64 > ../log/train_yoochoose1_64.log &
+nohup python -u main.py --dataset=diginetica > ../log/train_diginetica.log 2>&1 &
+nohup python -u main.py --dataset=yoochoose1_4 > ../log/train_yoochoose1_4.log 2>&1 &
+nohup python -u main.py --dataset=yoochoose1_64 > ../log/train_yoochoose1_64.log 2>&1 &
 ```
 
 ```bash

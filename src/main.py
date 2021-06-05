@@ -32,6 +32,8 @@ parser.add_argument('--lr_dc', type=float, default=0.1, help='learning rate deca
 parser.add_argument('--lr_dc_step', type=int, default=3, help='the number of steps after which the learning rate decay')
 parser.add_argument('--l2', type=float, default=1e-5, help='l2 penalty')  # [0.001, 0.0005, 0.0001, 0.00005, 0.00001]
 parser.add_argument('--top_k', type=int, default=20, help='top K indicator for evaluation')
+parser.add_argument("--use_san", default='False', action='store_true', help='use self attention layers')
+parser.add_argument("--use_gat", default='False', action='store_true', help='use GAT layers')
 opt = parser.parse_args()
 logging.warning(opt)
 
@@ -59,7 +61,8 @@ def main():
     else:
         n_node = 309
 
-    model = GNNModel(hidden_size=opt.hidden_size, n_node=n_node).to(device)
+    model = GNNModel(hidden_size=opt.hidden_size, n_node=n_node,
+                     use_san=opt.use_san, use_gat=opt.use_gat).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=opt.lr, weight_decay=opt.l2)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=opt.lr_dc_step, gamma=opt.lr_dc)

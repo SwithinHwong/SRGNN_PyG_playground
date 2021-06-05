@@ -7,6 +7,7 @@ Created on 5/4/2019
 
 import numpy as np
 import logging
+from tqdm import tqdm
 
 
 def forward(model, loader, device, writer, epoch, top_k=20, optimizer=None, train_flag=True):
@@ -19,12 +20,13 @@ def forward(model, loader, device, writer, epoch, top_k=20, optimizer=None, trai
     mean_loss = 0.0
     updates_per_epoch = len(loader)
 
-    for i, batch in enumerate(loader):
+    for i, batch in enumerate(tqdm(loader, desc=f'epoch{epoch}')):
         if train_flag:
             optimizer.zero_grad()
         scores = model(batch.to(device))
         targets = batch.y - 1
         loss = model.loss_function(scores, targets)
+        # raise RuntimeError('debugging break here')
 
         if train_flag:
             loss.backward()

@@ -30,6 +30,10 @@ nohup python -u main.py --dataset=yoochoose1_4 > ../log/train_yoochoose1_4.log &
 nohup python -u main.py --dataset=yoochoose1_64 > ../log/train_yoochoose1_64.log &
 ```
 
+```bash
+tensorboard --logdir=../log
+```
+
 ## Citation
 
 If you make advantage of the SR-GNN model in your research, please cite the following:

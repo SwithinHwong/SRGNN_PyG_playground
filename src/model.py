@@ -79,12 +79,12 @@ class Embedding2ScoreSAN(nn.Module):
         v_i = torch.split(node_embedding, tuple(sections.cpu().numpy()))    # split whole x back into graphs G_i
         v_n_repeat = tuple(nodes[-1].view(1, -1).repeat(nodes.shape[0], 1) for nodes in v_i)    # repeat |V|_i times for the last node embedding
 
-        # Eq(6)
-        alpha = self.q(torch.sigmoid(self.W_1(torch.cat(v_n_repeat, dim=0)) + self.W_2(node_embedding)))    # |V|_i * 1
-        s_g_whole = num_count.view(-1, 1) * alpha * node_embedding    # |V|_i * hidden_size
-        s_g_split = torch.split(s_g_whole, tuple(sections.cpu().numpy()))    # split whole s_g into graphs G_i
-        s_g = tuple(torch.sum(embeddings, dim=0).view(1, -1) for embeddings in s_g_split)
-        # print('origin s_g[0].shape', s_g[0].shape)
+        # # Eq(6)
+        # alpha = self.q(torch.sigmoid(self.W_1(torch.cat(v_n_repeat, dim=0)) + self.W_2(node_embedding)))    # |V|_i * 1
+        # s_g_whole = num_count.view(-1, 1) * alpha * node_embedding    # |V|_i * hidden_size
+        # s_g_split = torch.split(s_g_whole, tuple(sections.cpu().numpy()))    # split whole s_g into graphs G_i
+        # s_g = tuple(torch.sum(embeddings, dim=0).view(1, -1) for embeddings in s_g_split)
+        # # print('origin s_g[0].shape', s_g[0].shape)
 
         s_g = []
         for node_embs in v_i:

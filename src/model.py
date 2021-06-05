@@ -77,7 +77,7 @@ class Embedding2ScoreSAN(nn.Module):
     def forward(self, node_embedding, item_embedding_table, batch, num_count):
         sections = torch.bincount(batch)
         v_i = torch.split(node_embedding, tuple(sections.cpu().numpy()))    # split whole x back into graphs G_i
-        v_n_repeat = tuple(nodes[-1].view(1, -1).repeat(nodes.shape[0], 1) for nodes in v_i)    # repeat |V|_i times for the last node embedding
+        # v_n_repeat = tuple(nodes[-1].view(1, -1).repeat(nodes.shape[0], 1) for nodes in v_i)    # repeat |V|_i times for the last node embedding
 
         # # Eq(6)
         # alpha = self.q(torch.sigmoid(self.W_1(torch.cat(v_n_repeat, dim=0)) + self.W_2(node_embedding)))    # |V|_i * 1
@@ -101,8 +101,6 @@ class Embedding2ScoreSAN(nn.Module):
         
         # Eq(8)
         z_i_hat = torch.mm(s_h, item_embedding_table.weight.transpose(1, 0))
-
-        
         
         return z_i_hat
 

@@ -2,7 +2,7 @@
 
 A reimplementation of SRGNN.
 
-![image](SRGNN_PyG_playground/blob/master/Results.PNG)
+![image](Results.PNG)
 
 Original code from [here](https://github.com/CRIPAC-DIG/SR-GNN). Original [paper](https://arxiv.org/abs/1811.00855).
 

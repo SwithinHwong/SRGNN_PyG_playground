@@ -1,8 +1,8 @@
 # SRGNN_PyG_Playground
 
-A reimplementation of SRGNN. 
+A reimplementation of SRGNN.
 
-![image](https://github.com/SwithinHwong/SRGNN_PyG_playground/blob/master/Results.PNG)
+![image](SRGNN_PyG_playground/blob/master/Results.PNG)
 
 Original code from [here](https://github.com/CRIPAC-DIG/SR-GNN). Original [paper](https://arxiv.org/abs/1811.00855).
 
@@ -28,6 +28,8 @@ cd src
 nohup python -u main.py --dataset=diginetica > ../log/train_diginetica.log 2>&1 &
 nohup python -u main.py --dataset=yoochoose1_4 > ../log/train_yoochoose1_4.log 2>&1 &
 nohup python -u main.py --dataset=yoochoose1_64 > ../log/train_yoochoose1_64.log 2>&1 &
+
+nohup python -u main.py --dataset=diginetica --use_san > ../log/train_diginetica_san.log 2>&1 &
 ```
 
 ```bash

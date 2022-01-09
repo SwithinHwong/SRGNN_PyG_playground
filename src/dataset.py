@@ -42,9 +42,9 @@ class MultiSessionsGraph(InMemoryDataset):
             # sequence = [1, 2, 3, 2, 4]
             count = collections.Counter(sequence)
             i = 0
-            nodes = {}    # dict{15: 0, 16: 1, 18: 2, ...}
-            senders = []
-            x = []
+            nodes = {}    # dict{15: 0, 16: 1, 18: 2, ...}  # ReId nodes for each session graph
+            senders = []  # ReIded all nodes in sequence
+            x = []  # unique nodes in temporal order. Origin node ID.
             for node in sequence:
                 if node not in nodes:
                     nodes[node] = i
@@ -52,35 +52,35 @@ class MultiSessionsGraph(InMemoryDataset):
                     i += 1
                 senders.append(nodes[node])
             receivers = senders[:]
-            num_count = [count[i[0]] for i in x]
+            num_count = [count[i[0]] for i in x]  # occurrence of unique nodes
 
             if len(senders) != 1:
                 del senders[-1]  # the last item is a receiver
                 del receivers[0]  # the first item is a sender
 
-            pair = {}
+            pair = {}  # occurrence of the edge
             sur_senders = senders[:]
             sur_receivers = receivers[:]
             i = 0
             for sender, receiver in zip(sur_senders, sur_receivers):
                 if str(sender) + '-' + str(receiver) in pair:
                     pair[str(sender) + '-' + str(receiver)] += 1
-                    del senders[i]
+                    del senders[i]  # remove duplicate edges from senders and receivers
                     del receivers[i]
                 else:
                     pair[str(sender) + '-' + str(receiver)] = 1
                     i += 1
 
             count = collections.Counter(senders)
-            out_degree_inv = [1 / count[i] for i in senders]
+            out_degree_inv = [1 / count[i] for i in senders]  # unique edges only
 
             count = collections.Counter(receivers)
-            in_degree_inv = [1 / count[i] for i in receivers]
+            in_degree_inv = [1 / count[i] for i in receivers]  # unique edges only
             
             in_degree_inv = torch.tensor(in_degree_inv, dtype=torch.float)
             out_degree_inv = torch.tensor(out_degree_inv, dtype=torch.float)
 
-            edge_count = [pair[str(senders[i]) + '-' + str(receivers[i])] for i in range(len(senders))]
+            edge_count = [pair[str(senders[i]) + '-' + str(receivers[i])] for i in range(len(senders))]  # edge count of each unique sender-receiver pair
             edge_count = torch.tensor(edge_count, dtype=torch.float)
 
             # senders, receivers = senders + receivers, receivers + senders

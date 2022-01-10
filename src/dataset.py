@@ -44,7 +44,7 @@ class MultiSessionsGraph(InMemoryDataset):
             i = 0
             nodes = {}    # dict{15: 0, 16: 1, 18: 2, ...}  # ReId nodes for each session graph
             senders = []  # ReIded all nodes in sequence
-            x = []  # unique nodes in temporal order. Origin node ID.
+            x = []  # unique nodes in temporal order. Origin node ID, starts from 1.
             for node in sequence:
                 if node not in nodes:
                     nodes[node] = i
